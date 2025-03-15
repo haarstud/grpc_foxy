@@ -13,13 +13,13 @@
 # limitations under the License.
 """The reflection-enabled version of gRPC helloworld.Greeter server."""
 
-from concurrent import futures
 import logging
+from concurrent import futures
 
 import grpc
-from grpc_reflection.v1alpha import reflection
 import helloworld_pb2
 import helloworld_pb2_grpc
+from grpc_reflection.v1alpha import reflection
 
 
 class Greeter(helloworld_pb2_grpc.GreeterServicer):

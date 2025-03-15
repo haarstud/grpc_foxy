@@ -39,9 +39,7 @@ def run():
         stub = helloworld_pb2_grpc.GreeterStub(channel)
         # Timeout in seconds.
         # Please refer gRPC Python documents for more detail. https://grpc.io/grpc/python/grpc.html
-        response = stub.SayHello(
-            helloworld_pb2.HelloRequest(name="you"), timeout=10
-        )
+        response = stub.SayHello(helloworld_pb2.HelloRequest(name="you"), timeout=10)
     print("Greeter client received: " + response.message)
 
 

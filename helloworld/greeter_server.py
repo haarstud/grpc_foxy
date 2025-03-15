@@ -13,8 +13,8 @@
 # limitations under the License.
 """The Python implementation of the GRPC helloworld.Greeter server."""
 
-from concurrent import futures
 import logging
+from concurrent import futures
 
 import grpc
 import helloworld_pb2

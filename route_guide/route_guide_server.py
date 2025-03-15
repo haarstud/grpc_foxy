@@ -13,10 +13,10 @@
 # limitations under the License.
 """The Python implementation of the gRPC route guide server."""
 
-from concurrent import futures
 import logging
 import math
 import time
+from concurrent import futures
 
 import grpc
 import route_guide_pb2
@@ -45,11 +45,7 @@ def get_distance(start, end):
     delta_lon_rad = math.radians(lon_2 - lon_1)
 
     # Formula is based on http://mathforum.org/library/drmath/view/51879.html
-    a = pow(math.sin(delta_lat_rad / 2), 2) + (
-        math.cos(lat_rad_1)
-        * math.cos(lat_rad_2)
-        * pow(math.sin(delta_lon_rad / 2), 2)
-    )
+    a = pow(math.sin(delta_lat_rad / 2), 2) + (math.cos(lat_rad_1) * math.cos(lat_rad_2) * pow(math.sin(delta_lon_rad / 2), 2))
     c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
     R = 6371000
     # metres
@@ -117,9 +113,7 @@ class RouteGuideServicer(route_guide_pb2_grpc.RouteGuideServicer):
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-    route_guide_pb2_grpc.add_RouteGuideServicer_to_server(
-        RouteGuideServicer(), server
-    )
+    route_guide_pb2_grpc.add_RouteGuideServicer_to_server(RouteGuideServicer(), server)
     server.add_insecure_port("[::]:50051")
     server.start()
     server.wait_for_termination()

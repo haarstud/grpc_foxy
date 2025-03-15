@@ -29,15 +29,11 @@ CHANNEL_OPTIONS = [
 
 
 async def run() -> None:
-    async with grpc.aio.insecure_channel(
-        target="localhost:50051", options=CHANNEL_OPTIONS
-    ) as channel:
+    async with grpc.aio.insecure_channel(target="localhost:50051", options=CHANNEL_OPTIONS) as channel:
         stub = helloworld_pb2_grpc.GreeterStub(channel)
         # Timeout in seconds.
         # Please refer gRPC Python documents for more detail. https://grpc.io/grpc/python/grpc.html
-        response = await stub.SayHello(
-            helloworld_pb2.HelloRequest(name="you"), timeout=10
-        )
+        response = await stub.SayHello(helloworld_pb2.HelloRequest(name="you"), timeout=10)
     print("Greeter client received: " + response.message)
 
 

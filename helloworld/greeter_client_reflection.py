@@ -15,8 +15,8 @@
 
 import logging
 
-from google.protobuf.descriptor_pool import DescriptorPool
 import grpc
+from google.protobuf.descriptor_pool import DescriptorPool
 from grpc_reflection.v1alpha.proto_reflection_descriptor_database import (
     ProtoReflectionDescriptorDatabase,
 )
@@ -37,9 +37,7 @@ def run():
             input_type = methods.input_type
             print(f"input type for this method: {input_type.full_name}")
 
-        request_desc = desc_pool.FindMessageTypeByName(
-            "helloworld.HelloRequest"
-        )
+        request_desc = desc_pool.FindMessageTypeByName("helloworld.HelloRequest")
         print(f"found request name: {request_desc.full_name}")
 
 

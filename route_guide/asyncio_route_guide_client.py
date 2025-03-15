@@ -16,7 +16,8 @@
 import asyncio
 import logging
 import random
-from typing import Iterable, List
+from typing import Iterable
+from typing import List
 
 import grpc
 import route_guide_pb2
@@ -24,9 +25,7 @@ import route_guide_pb2_grpc
 import route_guide_resources
 
 
-def make_route_note(
-    message: str, latitude: int, longitude: int
-) -> route_guide_pb2.RouteNote:
+def make_route_note(message: str, latitude: int, longitude: int) -> route_guide_pb2.RouteNote:
     return route_guide_pb2.RouteNote(
         message=message,
         location=route_guide_pb2.Point(latitude=latitude, longitude=longitude),
@@ -34,9 +33,7 @@ def make_route_note(
 
 
 # Performs an unary call
-async def guide_get_one_feature(
-    stub: route_guide_pb2_grpc.RouteGuideStub, point: route_guide_pb2.Point
-) -> None:
+async def guide_get_one_feature(stub: route_guide_pb2_grpc.RouteGuideStub, point: route_guide_pb2.Point) -> None:
     feature = await stub.GetFeature(point)
     if not feature.location:
         print("Server returned incomplete feature")
@@ -56,9 +53,7 @@ async def guide_get_feature(stub: route_guide_pb2_grpc.RouteGuideStub) -> None:
             stub,
             route_guide_pb2.Point(latitude=409146138, longitude=-746188906),
         ),
-        guide_get_one_feature(
-            stub, route_guide_pb2.Point(latitude=0, longitude=0)
-        ),
+        guide_get_one_feature(stub, route_guide_pb2.Point(latitude=0, longitude=0)),
     )
     # Wait until the Future is resolved
     await task_group

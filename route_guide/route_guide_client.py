@@ -44,18 +44,13 @@ def guide_get_one_feature(stub, point):
         return
 
     if feature.name:
-        print(
-            "Feature called %r at %s"
-            % (feature.name, format_point(feature.location))
-        )
+        print("Feature called %r at %s" % (feature.name, format_point(feature.location)))
     else:
         print("Found no feature at %s" % format_point(feature.location))
 
 
 def guide_get_feature(stub):
-    guide_get_one_feature(
-        stub, route_guide_pb2.Point(latitude=409146138, longitude=-746188906)
-    )
+    guide_get_one_feature(stub, route_guide_pb2.Point(latitude=409146138, longitude=-746188906))
     guide_get_one_feature(stub, route_guide_pb2.Point(latitude=0, longitude=0))
 
 
@@ -69,10 +64,7 @@ def guide_list_features(stub):
     features = stub.ListFeatures(rectangle)
 
     for feature in features:
-        print(
-            "Feature called %r at %s"
-            % (feature.name, format_point(feature.location))
-        )
+        print("Feature called %r at %s" % (feature.name, format_point(feature.location)))
 
 
 def generate_route(feature_list):
@@ -109,10 +101,7 @@ def generate_messages():
 def guide_route_chat(stub):
     responses = stub.RouteChat(generate_messages())
     for response in responses:
-        print(
-            "Received message %s at %s"
-            % (response.message, format_point(response.location))
-        )
+        print("Received message %s at %s" % (response.message, format_point(response.location)))
 
 
 def run():
