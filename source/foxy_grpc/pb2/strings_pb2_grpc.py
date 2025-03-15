@@ -3,7 +3,7 @@
 import grpc
 import warnings
 
-import protocol_pb2 as protocol__pb2
+from foxy_grpc.pb2 import strings_pb2 as foxy__grpc_dot_pb2_dot_strings__pb2
 
 GRPC_GENERATED_VERSION = '1.70.0'
 GRPC_VERSION = grpc.__version__
@@ -18,7 +18,7 @@ except ImportError:
 if _version_not_supported:
     raise RuntimeError(
         f'The grpc package installed is at version {GRPC_VERSION},'
-        + f' but the generated code in protocol_pb2_grpc.py depends on'
+        + f' but the generated code in foxy_grpc/pb2/strings_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
@@ -36,8 +36,8 @@ class StringServiceStub(object):
         """
         self.GetStrings = channel.unary_stream(
                 '/foxy_grpc.protocol.StringService/GetStrings',
-                request_serializer=protocol__pb2.StringRequest.SerializeToString,
-                response_deserializer=protocol__pb2.StringResponse.FromString,
+                request_serializer=foxy__grpc_dot_pb2_dot_strings__pb2.StringRequest.SerializeToString,
+                response_deserializer=foxy__grpc_dot_pb2_dot_strings__pb2.StringResponse.FromString,
                 _registered_method=True)
 
 
@@ -55,8 +55,8 @@ def add_StringServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetStrings': grpc.unary_stream_rpc_method_handler(
                     servicer.GetStrings,
-                    request_deserializer=protocol__pb2.StringRequest.FromString,
-                    response_serializer=protocol__pb2.StringResponse.SerializeToString,
+                    request_deserializer=foxy__grpc_dot_pb2_dot_strings__pb2.StringRequest.FromString,
+                    response_serializer=foxy__grpc_dot_pb2_dot_strings__pb2.StringResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -84,8 +84,8 @@ class StringService(object):
             request,
             target,
             '/foxy_grpc.protocol.StringService/GetStrings',
-            protocol__pb2.StringRequest.SerializeToString,
-            protocol__pb2.StringResponse.FromString,
+            foxy__grpc_dot_pb2_dot_strings__pb2.StringRequest.SerializeToString,
+            foxy__grpc_dot_pb2_dot_strings__pb2.StringResponse.FromString,
             options,
             channel_credentials,
             insecure,

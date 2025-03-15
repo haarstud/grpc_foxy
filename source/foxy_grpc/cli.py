@@ -1,6 +1,7 @@
 import concurrent.futures
 
 import click
+import foxy_grpc.pb2.strings_pb2_grpc
 import foxy_grpc.server
 import grpc
 
@@ -17,7 +18,7 @@ def main(context):
 def server(port):
     grpc_server = grpc.server(concurrent.futures.ThreadPoolExecutor())
     servicer = foxy_grpc.server.Server()
-    foxy_grpc.pb2.protocol_pb2_grpc.add_StringServiceServicer_to_server(servicer, grpc_server)
+    foxy_grpc.pb2.strings_pb2_grpc.add_StringServiceServicer_to_server(servicer, grpc_server)
     grpc_server.add_insecure_port(f"[::]:{port}")
     grpc_server.start()
     grpc_server.wait_for_termination()
