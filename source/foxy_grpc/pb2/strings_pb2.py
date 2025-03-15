@@ -24,17 +24,17 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1b\x66oxy_grpc/pb2/strings.proto\x12\x12\x66oxy_grpc.protocol\"/\n\rStringRequest\x12\r\n\x05\x63ount\x18\x01 \x01(\r\x12\x0f\n\x07\x66orever\x18\x02 \x01(\x08\"!\n\x0eStringResponse\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\t2h\n\rStringService\x12W\n\nGetStrings\x12!.foxy_grpc.protocol.StringRequest\x1a\".foxy_grpc.protocol.StringResponse\"\x00\x30\x01\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1b\x66oxy_grpc/pb2/strings.proto\"/\n\rStringRequest\x12\r\n\x05\x63ount\x18\x01 \x01(\r\x12\x0f\n\x07\x66orever\x18\x02 \x01(\x08\"!\n\x0eStringResponse\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\t2B\n\rStringService\x12\x31\n\nGetStrings\x12\x0e.StringRequest\x1a\x0f.StringResponse\"\x00\x30\x01\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'foxy_grpc.pb2.strings_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
-  _globals['_STRINGREQUEST']._serialized_start=51
-  _globals['_STRINGREQUEST']._serialized_end=98
-  _globals['_STRINGRESPONSE']._serialized_start=100
-  _globals['_STRINGRESPONSE']._serialized_end=133
-  _globals['_STRINGSERVICE']._serialized_start=135
-  _globals['_STRINGSERVICE']._serialized_end=239
+  _globals['_STRINGREQUEST']._serialized_start=31
+  _globals['_STRINGREQUEST']._serialized_end=78
+  _globals['_STRINGRESPONSE']._serialized_start=80
+  _globals['_STRINGRESPONSE']._serialized_end=113
+  _globals['_STRINGSERVICE']._serialized_start=115
+  _globals['_STRINGSERVICE']._serialized_end=181
 # @@protoc_insertion_point(module_scope)

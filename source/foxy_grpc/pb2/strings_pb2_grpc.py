@@ -35,7 +35,7 @@ class StringServiceStub(object):
             channel: A grpc.Channel.
         """
         self.GetStrings = channel.unary_stream(
-                '/foxy_grpc.protocol.StringService/GetStrings',
+                '/StringService/GetStrings',
                 request_serializer=foxy__grpc_dot_pb2_dot_strings__pb2.StringRequest.SerializeToString,
                 response_deserializer=foxy__grpc_dot_pb2_dot_strings__pb2.StringResponse.FromString,
                 _registered_method=True)
@@ -60,9 +60,9 @@ def add_StringServiceServicer_to_server(servicer, server):
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'foxy_grpc.protocol.StringService', rpc_method_handlers)
+            'StringService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('foxy_grpc.protocol.StringService', rpc_method_handlers)
+    server.add_registered_method_handlers('StringService', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
@@ -83,7 +83,7 @@ class StringService(object):
         return grpc.experimental.unary_stream(
             request,
             target,
-            '/foxy_grpc.protocol.StringService/GetStrings',
+            '/StringService/GetStrings',
             foxy__grpc_dot_pb2_dot_strings__pb2.StringRequest.SerializeToString,
             foxy__grpc_dot_pb2_dot_strings__pb2.StringResponse.FromString,
             options,
