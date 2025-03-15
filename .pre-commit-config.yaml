@@ -9,16 +9,19 @@ repos:
       args:
         - "--exclude=helloworld/*"
         - "--exclude=route_guide/*"
+        - "--exclude=source/foxy_grpc/pb2/*"
 - repo: https://github.com/PyCQA/flake8
   rev: 7.1.1
   hooks:
     - id: flake8
+      exclude: pb2
       args:
         - --ignore=E501,F541,W503,F401
 - repo: https://github.com/psf/black
   rev: 24.8.0
   hooks:
   - id: black
+    exclude: source/foxy_grpc/pb2
     args:
       - --line-length=150
       - --target-version=py312
@@ -35,6 +38,7 @@ repos:
   hooks:
     - id: isort
       name: isort (python)
+      exclude: pb2
       args:
         - "--profile=black"
         - "--force-single-line-imports"
