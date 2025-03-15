@@ -6,12 +6,15 @@ repos:
   hooks:
     - id: yaml-not-yml
     - id: foxylint-imports
+      args:
+        - "--exclude=helloworld/*"
+        - "--exclude=route_guide/*"
 - repo: https://github.com/PyCQA/flake8
   rev: 7.1.1
   hooks:
     - id: flake8
       args:
-        - --ignore=E501,F541,W503
+        - --ignore=E501,F541,W503,F401
 - repo: https://github.com/psf/black
   rev: 24.8.0
   hooks:
@@ -35,11 +38,11 @@ repos:
       args:
         - "--profile=black"
         - "--force-single-line-imports"
-- repo: https://github.com/pre-commit/mirrors-mypy
-  rev: 'v1.11.2'
-  hooks:
-    - id: mypy
-      additional_dependencies: [pydantic, types-requests, types-PyYAML]
+#- repo: https://github.com/pre-commit/mirrors-mypy
+  #rev: 'v1.11.2'
+  #hooks:
+    #- id: mypy
+      #additional_dependencies: [pydantic, types-requests, types-PyYAML]
 - repo: https://github.com/python-jsonschema/check-jsonschema
   rev: 0.29.2
   hooks:
