@@ -4,6 +4,7 @@ package foxy_grpc.protocol;
 
 message StringRequest {
     uint32 count = 1;
+    bool forever = 2;
 }
 
 message StringResponse {
