@@ -4,6 +4,7 @@ import uuid
 import foxy_grpc.pb2.strings_pb2
 import foxy_grpc.pb2.strings_pb2_grpc
 
+
 class Server(foxy_grpc.pb2.strings_pb2_grpc.StringServiceServicer):
     def GetStrings(self, request, context):
         logging.info(f"GetStrings called: <{request}>")
