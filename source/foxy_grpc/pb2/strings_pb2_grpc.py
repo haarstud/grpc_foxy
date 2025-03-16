@@ -39,6 +39,11 @@ class StringServiceStub(object):
                 request_serializer=foxy__grpc_dot_pb2_dot_strings__pb2.StringRequest.SerializeToString,
                 response_deserializer=foxy__grpc_dot_pb2_dot_strings__pb2.StringResponse.FromString,
                 _registered_method=True)
+        self.SayHi = channel.unary_unary(
+                '/StringService/SayHi',
+                request_serializer=foxy__grpc_dot_pb2_dot_strings__pb2.EmptyMessage.SerializeToString,
+                response_deserializer=foxy__grpc_dot_pb2_dot_strings__pb2.EmptyMessage.FromString,
+                _registered_method=True)
 
 
 class StringServiceServicer(object):
@@ -50,6 +55,12 @@ class StringServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def SayHi(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('too bad, not implemented')
+        raise NotImplementedError('too bad, not implemented!')
+
 
 def add_StringServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -57,6 +68,11 @@ def add_StringServiceServicer_to_server(servicer, server):
                     servicer.GetStrings,
                     request_deserializer=foxy__grpc_dot_pb2_dot_strings__pb2.StringRequest.FromString,
                     response_serializer=foxy__grpc_dot_pb2_dot_strings__pb2.StringResponse.SerializeToString,
+            ),
+            'SayHi': grpc.unary_unary_rpc_method_handler(
+                    servicer.SayHi,
+                    request_deserializer=foxy__grpc_dot_pb2_dot_strings__pb2.EmptyMessage.FromString,
+                    response_serializer=foxy__grpc_dot_pb2_dot_strings__pb2.EmptyMessage.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -86,6 +102,33 @@ class StringService(object):
             '/StringService/GetStrings',
             foxy__grpc_dot_pb2_dot_strings__pb2.StringRequest.SerializeToString,
             foxy__grpc_dot_pb2_dot_strings__pb2.StringResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def SayHi(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/StringService/SayHi',
+            foxy__grpc_dot_pb2_dot_strings__pb2.EmptyMessage.SerializeToString,
+            foxy__grpc_dot_pb2_dot_strings__pb2.EmptyMessage.FromString,
             options,
             channel_credentials,
             insecure,
