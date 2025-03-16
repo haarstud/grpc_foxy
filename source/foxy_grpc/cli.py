@@ -33,7 +33,6 @@ def client(context, server_url):
     context.obj["server_url"] = server_url
 
 
-
 @client.command()
 @click.pass_context
 @click.argument("count", type=int)
@@ -53,9 +52,19 @@ def stream_strings(context, count: int, forever: bool, interval: float):
 @client.command()
 @click.pass_context
 def sayhi(context):
-    channel = grpc.insecure_channel("localhost:3333")
+    server_url = context.obj["server_url"]
+    channel = grpc.insecure_channel(server_url)
     stub = foxy_grpc.pb2.strings_pb2_grpc.StringServiceStub(channel)
     response = stub.SayHi(foxy_grpc.pb2.strings_pb2.EmptyMessage())
     logging.info(f"Response: {response}")
 
 
+@client.command()
+@click.pass_context
+@click.argument("number", type=float)
+def square(context, number):
+    server_url = context.obj["server_url"]
+    channel = grpc.insecure_channel(server_url)
+    stub = foxy_grpc.pb2.strings_pb2_grpc.StringServiceStub(channel)
+    response = stub.Square(foxy_grpc.pb2.strings_pb2.Number(value=number))
+    logging.info(f"Response: {response}")
