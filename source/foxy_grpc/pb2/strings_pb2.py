@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1b\x66oxy_grpc/pb2/strings.proto\"A\n\rStringRequest\x12\r\n\x05\x63ount\x18\x01 \x01(\r\x12\x0f\n\x07\x66orever\x18\x02 \x01(\x08\x12\x10\n\x08interval\x18\x03 \x01(\x02\"!\n\x0eStringResponse\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\t\"\x0e\n\x0c\x45mptyMessage\"\x17\n\x06Number\x12\r\n\x05value\x18\x01 \x01(\x02\x32\x89\x01\n\rStringService\x12\x31\n\nGetStrings\x12\x0e.StringRequest\x1a\x0f.StringResponse\"\x00\x30\x01\x12\'\n\x05SayHi\x12\r.EmptyMessage\x1a\r.EmptyMessage\"\x00\x12\x1c\n\x06Square\x12\x07.Number\x1a\x07.Number\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1b\x66oxy_grpc/pb2/strings.proto\"A\n\rStringRequest\x12\r\n\x05\x63ount\x18\x01 \x01(\r\x12\x0f\n\x07\x66orever\x18\x02 \x01(\x08\x12\x10\n\x08interval\x18\x03 \x01(\x02\"!\n\x0eStringResponse\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\t\"\x0e\n\x0c\x45mptyMessage\"\x17\n\x06Number\x12\r\n\x05value\x18\x01 \x01(\x02\"4\n\x07WhatAmI\x12\x0e\n\x04text\x18\x01 \x01(\tH\x00\x12\x10\n\x06number\x18\x02 \x01(\x02H\x00\x42\x07\n\x05value2\xb0\x01\n\rStringService\x12\x31\n\nGetStrings\x12\x0e.StringRequest\x1a\x0f.StringResponse\"\x00\x30\x01\x12\'\n\x05SayHi\x12\r.EmptyMessage\x1a\r.EmptyMessage\"\x00\x12\x1c\n\x06Square\x12\x07.Number\x1a\x07.Number\"\x00\x12%\n\x06TellMe\x12\x08.WhatAmI\x1a\x0f.StringResponse\"\x00\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -39,6 +39,8 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_EMPTYMESSAGE']._serialized_end=147
   _globals['_NUMBER']._serialized_start=149
   _globals['_NUMBER']._serialized_end=172
-  _globals['_STRINGSERVICE']._serialized_start=175
-  _globals['_STRINGSERVICE']._serialized_end=312
+  _globals['_WHATAMI']._serialized_start=174
+  _globals['_WHATAMI']._serialized_end=226
+  _globals['_STRINGSERVICE']._serialized_start=229
+  _globals['_STRINGSERVICE']._serialized_end=405
 # @@protoc_insertion_point(module_scope)

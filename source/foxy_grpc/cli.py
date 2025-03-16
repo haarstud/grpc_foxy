@@ -68,3 +68,26 @@ def square(context, number):
     stub = foxy_grpc.pb2.strings_pb2_grpc.StringServiceStub(channel)
     response = stub.Square(foxy_grpc.pb2.strings_pb2.Number(value=number))
     logging.info(f"Response: {response}")
+
+
+@client.command()
+@click.pass_context
+@click.argument("thing", type=str)
+def tellme(context, thing):
+    server_url = context.obj["server_url"]
+    number = None
+    try:
+        number = float(thing)
+    except ValueError:
+        pass
+
+    if number is not None:
+        thing = number
+        request = foxy_grpc.pb2.strings_pb2.WhatAmI(number=number)
+    else:
+        request = foxy_grpc.pb2.strings_pb2.WhatAmI(text=thing)
+
+    channel = grpc.insecure_channel(server_url)
+    stub = foxy_grpc.pb2.strings_pb2_grpc.StringServiceStub(channel)
+    response = stub.TellMe(request)
+    logging.info(f"Response: {response}")

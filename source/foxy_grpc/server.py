@@ -30,3 +30,14 @@ class Server(foxy_grpc.pb2.strings_pb2_grpc.StringServiceServicer):
     def Square(self, request, context):
         logging.info(f"Square called: <{request}>")
         return foxy_grpc.pb2.strings_pb2.Number(value=request.value * request.value)
+
+    def TellMe(self, request, context):
+        logging.info(f"TellMe called: <{request}>")
+        logging.info(f'request fields: {request.ListFields()}')
+        logging.info(f'has number: {request.HasField("number")}')
+        logging.info(f'has text: {request.HasField("text")}')
+
+        if request.HasField("number"):
+            return foxy_grpc.pb2.strings_pb2.StringResponse(content=f"a number: {request.number}")
+        else:
+            return foxy_grpc.pb2.strings_pb2.StringResponse(content=f"a string: {request.text}")

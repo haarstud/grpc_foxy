@@ -16,8 +16,16 @@ message Number {
     float value = 1;
 }
 
+message WhatAmI {
+ oneof value {
+   string text = 1;
+   float  number = 2;
+ }
+}
+
 service StringService {
     rpc GetStrings(StringRequest) returns (stream StringResponse) {}
     rpc SayHi(EmptyMessage) returns (EmptyMessage) {}
     rpc Square(Number) returns (Number) {}
+    rpc TellMe(WhatAmI) returns (StringResponse) {}
 }
