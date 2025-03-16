@@ -3,6 +3,7 @@ syntax = "proto3";
 message StringRequest {
     uint32 count = 1;
     bool forever = 2;
+    float interval = 3;
 }
 
 message StringResponse {

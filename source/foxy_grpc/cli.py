@@ -26,25 +26,36 @@ def server(context, port):
     grpc_server.wait_for_termination()
 
 
-@main.command()
+@main.group()
 @click.pass_context
 @click.argument("server_url", type=str)
+def client(context, server_url):
+    context.obj["server_url"] = server_url
+
+
+
+@client.command()
+@click.pass_context
 @click.argument("count", type=int)
 @click.option("--forever", is_flag=True)
-def client(context, server_url, count: int, forever: bool):
+@click.option("--interval", type=float, default=0)
+def stream_strings(context, count: int, forever: bool, interval: float):
+    server_url = context.obj["server_url"]
     channel = grpc.insecure_channel(server_url)
     stub = foxy_grpc.pb2.strings_pb2_grpc.StringServiceStub(channel)
     logging.info(f'Client stub is {stub}')
-    response = stub.GetStrings(foxy_grpc.pb2.strings_pb2.StringRequest(count=5, forever=forever))
+    response = stub.GetStrings(foxy_grpc.pb2.strings_pb2.StringRequest(count=5, interval=interval, forever=forever))
     logging.info(f"Response: {response}")
     for string in response:
         logging.info(f"Received string: {string.content}")
 
 
-@main.command()
+@client.command()
 @click.pass_context
 def sayhi(context):
     channel = grpc.insecure_channel("localhost:3333")
     stub = foxy_grpc.pb2.strings_pb2_grpc.StringServiceStub(channel)
     response = stub.SayHi(foxy_grpc.pb2.strings_pb2.EmptyMessage())
     logging.info(f"Response: {response}")
+
+
