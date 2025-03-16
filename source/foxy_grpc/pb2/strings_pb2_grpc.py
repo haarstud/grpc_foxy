@@ -44,6 +44,16 @@ class StringServiceStub(object):
                 request_serializer=foxy__grpc_dot_pb2_dot_strings__pb2.EmptyMessage.SerializeToString,
                 response_deserializer=foxy__grpc_dot_pb2_dot_strings__pb2.EmptyMessage.FromString,
                 _registered_method=True)
+        self.Square = channel.unary_unary(
+                '/StringService/Square',
+                request_serializer=foxy__grpc_dot_pb2_dot_strings__pb2.Number.SerializeToString,
+                response_deserializer=foxy__grpc_dot_pb2_dot_strings__pb2.Number.FromString,
+                _registered_method=True)
+        self.TellMe = channel.unary_unary(
+                '/StringService/TellMe',
+                request_serializer=foxy__grpc_dot_pb2_dot_strings__pb2.WhatAmI.SerializeToString,
+                response_deserializer=foxy__grpc_dot_pb2_dot_strings__pb2.StringResponse.FromString,
+                _registered_method=True)
 
 
 class StringServiceServicer(object):
@@ -58,8 +68,20 @@ class StringServiceServicer(object):
     def SayHi(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('too bad, not implemented')
-        raise NotImplementedError('too bad, not implemented!')
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def Square(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def TellMe(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
 
 def add_StringServiceServicer_to_server(servicer, server):
@@ -73,6 +95,16 @@ def add_StringServiceServicer_to_server(servicer, server):
                     servicer.SayHi,
                     request_deserializer=foxy__grpc_dot_pb2_dot_strings__pb2.EmptyMessage.FromString,
                     response_serializer=foxy__grpc_dot_pb2_dot_strings__pb2.EmptyMessage.SerializeToString,
+            ),
+            'Square': grpc.unary_unary_rpc_method_handler(
+                    servicer.Square,
+                    request_deserializer=foxy__grpc_dot_pb2_dot_strings__pb2.Number.FromString,
+                    response_serializer=foxy__grpc_dot_pb2_dot_strings__pb2.Number.SerializeToString,
+            ),
+            'TellMe': grpc.unary_unary_rpc_method_handler(
+                    servicer.TellMe,
+                    request_deserializer=foxy__grpc_dot_pb2_dot_strings__pb2.WhatAmI.FromString,
+                    response_serializer=foxy__grpc_dot_pb2_dot_strings__pb2.StringResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -129,6 +161,60 @@ class StringService(object):
             '/StringService/SayHi',
             foxy__grpc_dot_pb2_dot_strings__pb2.EmptyMessage.SerializeToString,
             foxy__grpc_dot_pb2_dot_strings__pb2.EmptyMessage.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def Square(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/StringService/Square',
+            foxy__grpc_dot_pb2_dot_strings__pb2.Number.SerializeToString,
+            foxy__grpc_dot_pb2_dot_strings__pb2.Number.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def TellMe(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/StringService/TellMe',
+            foxy__grpc_dot_pb2_dot_strings__pb2.WhatAmI.SerializeToString,
+            foxy__grpc_dot_pb2_dot_strings__pb2.StringResponse.FromString,
             options,
             channel_credentials,
             insecure,

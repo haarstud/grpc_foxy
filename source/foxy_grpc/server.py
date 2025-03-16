@@ -1,8 +1,14 @@
 import logging
+import time
 import uuid
 
 import foxy_grpc.pb2.strings_pb2
 import foxy_grpc.pb2.strings_pb2_grpc
+
+
+def sleep(interval):
+    if interval > 0:
+        time.sleep(interval)
 
 
 class Server(foxy_grpc.pb2.strings_pb2_grpc.StringServiceServicer):
@@ -13,8 +19,25 @@ class Server(foxy_grpc.pb2.strings_pb2_grpc.StringServiceServicer):
             while True:
                 u = uuid.uuid4()
                 yield foxy_grpc.pb2.strings_pb2.StringResponse(content=f"{i}: {u}")
+                sleep(request.interval)
                 i += 1
         else:
             for i in range(request.count):
                 u = uuid.uuid4()
                 yield foxy_grpc.pb2.strings_pb2.StringResponse(content=f"{i}: {u}")
+                sleep(request.interval)
+
+    def Square(self, request, context):
+        logging.info(f"Square called: <{request}>")
+        return foxy_grpc.pb2.strings_pb2.Number(value=request.value * request.value)
+
+    def TellMe(self, request, context):
+        logging.info(f"TellMe called: <{request}>")
+        logging.info(f'request fields: {request.ListFields()}')
+        logging.info(f'has number: {request.HasField("number")}')
+        logging.info(f'has text: {request.HasField("text")}')
+
+        if request.HasField("number"):
+            return foxy_grpc.pb2.strings_pb2.StringResponse(content=f"a number: {request.number}")
+        else:
+            return foxy_grpc.pb2.strings_pb2.StringResponse(content=f"a string: {request.text}")
