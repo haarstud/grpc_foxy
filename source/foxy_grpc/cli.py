@@ -39,3 +39,12 @@ def client(context, server_url, count: int, forever: bool):
     logging.info(f"Response: {response}")
     for string in response:
         logging.info(f"Received string: {string.content}")
+
+
+@main.command()
+@click.pass_context
+def sayhi(context):
+    channel = grpc.insecure_channel("localhost:3333")
+    stub = foxy_grpc.pb2.strings_pb2_grpc.StringServiceStub(channel)
+    response = stub.SayHi(foxy_grpc.pb2.strings_pb2.EmptyMessage())
+    logging.info(f"Response: {response}")

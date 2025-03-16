@@ -9,6 +9,9 @@ message StringResponse {
     string content = 1;
 }
 
+message EmptyMessage {}
+
 service StringService {
     rpc GetStrings(StringRequest) returns (stream StringResponse) {}
+    rpc SayHi(EmptyMessage) returns (EmptyMessage) {}
 }
